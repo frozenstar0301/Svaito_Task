@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import styles from "../shared/page.module.css";
+import styles from "../shared/";
 import Chat from "../../components/chat";
 import AvailabilityWidget from "../../components/availability-widget";
 
@@ -16,29 +16,35 @@ const SearchAvailability = () => {
 
   const [isEmpty, setIsEmpty] = useState(true); // Initial state is empty
 
-  const functionCallHandler = async (call: any) => {
-    if (call?.function?.name !== "search_availability") return;
-
+  const functionCallHandler = async (call: any): Promise<string> => {
+    if (call?.function?.name !== "search_availability") return '';
+  
     const args = JSON.parse(call.function.arguments);
-    const response = await fetch('/api/search_availability', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ date: args.date }),
-    });
-
-    const data = await response.json();
-    setAvailabilityData({
-      ...data,
-      date: args.date || "---",
-    });
-    setIsEmpty(false); // Data is available after fetching
-
-    return JSON.stringify(data);
+    try {
+      const response = await fetch('/api/search_availability', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ date: args.date }),
+      });
+  
+      const data = await response.json();
+      setAvailabilityData({
+        ...data,
+        date: args.date || "---",
+      });
+      setIsEmpty(false); // Data is available after fetching
+  
+      return JSON.stringify(data);
+    } catch (error) {
+      console.error('Error fetching availability:', error);
+      setIsEmpty(true); // Handle the error state if necessary
+      return ''; // Ensure a string is always returned
+    }
   };
 
   // Update isEmpty state based on the availability data
   useEffect(() => {
-    if (availabilityData.message || availabilityData.errorMessage) {
+    if (availabilityData.message || availabilityData.errorType) {
       setIsEmpty(false);
     }
   }, [availabilityData]);
