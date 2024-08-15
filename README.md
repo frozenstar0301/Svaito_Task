@@ -22,6 +22,11 @@ This project is a Next.js application that integrates with OpenAI's API to provi
 
 1. **Clone the repository:**
 
+    ```bash
+    git clone https://github.com/frozenstar0301/Svaito_Task.git
+    cd Svaito_Task
+    ```
+
 2. **Install dependencies:**
 
     ```bash
@@ -85,7 +90,7 @@ This project is a Next.js application that integrates with OpenAI's API to provi
 
 To ensure the project works correctly, consider using a testing framework such as Jest.
 
-1. **Run tests:**
+**Run tests:**
 
     ```bash
     npm test
