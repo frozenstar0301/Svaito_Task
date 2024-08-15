@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import styles from "../shared/";
+import styles from "../shared/page.module.css";
 import Chat from "../../components/chat";
 import AvailabilityWidget from "../../components/availability-widget";
 
