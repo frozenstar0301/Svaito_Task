@@ -27,7 +27,7 @@ const AvailabilityWidget = ({
         <div className={styles.availabilityEmptyState}>
           <h2>Welcome to the Golf Course Availability Checker</h2>
           <p>Enter a date to check availability for golf courses.</p>
-          <p>Example: "Is October 9th available?"</p>
+          <p>Example: "Is October 9th 2024 available?"</p>
           <p>Please use the format YYYY-MM-DD for best results.</p>
         </div>
       ) : errorMessage ? (
